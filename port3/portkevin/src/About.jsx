@@ -4,6 +4,8 @@ import InfiniteScroll from './InfiniteScroll';
 // Navigation and footer import
 import Navbar from './Navbar';
 import Footer from './Footer';
+// Lazy loading components
+import LazyImage from './LazyImage';
 // Unique styles import
 import './PortfolioStyles.css';
 // Metadata dependency
@@ -128,14 +130,14 @@ const About = () => {
 
     // Gallery images
     const galleryItems = [
-        { content: <img src="/img/his1.jpg" alt="Gallery image 1" /> },
-        { content: <img src="/img/who1.jpeg" alt="Gallery image 2" /> },
-        { content: <img src="/img/his3.JPG" alt="Gallery image 3" /> },
-        { content: <img src="/img/who2.jpg" alt="Gallery image 4" /> },
-        { content: <img src="/img/principles1.png" alt="Gallery image 5" /> },
-        { content: <img src="/img/his2.jpg" alt="Gallery image 6" /> },
-        { content: <img src="/img/beyond1.JPG" alt="Gallery image 7" /> },
-        { content: <img src="/img/who3.png" alt="Gallery image 8" /> },
+        { content: <LazyImage src="/img/his1.jpg" alt="Gallery image 1" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/who1.jpeg" alt="Gallery image 2" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/his3.JPG" alt="Gallery image 3" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/who2.jpg" alt="Gallery image 4" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/principles1.png" alt="Gallery image 5" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/his2.jpg" alt="Gallery image 6" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/beyond1.JPG" alt="Gallery image 7" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
+        { content: <LazyImage src="/img/who3.png" alt="Gallery image 8" placeholder={<div className="bg-gray-200 w-full h-full flex items-center justify-center">Loading...</div>} /> },
     ];
 
     // About content sections with updated content, being rendered with map.

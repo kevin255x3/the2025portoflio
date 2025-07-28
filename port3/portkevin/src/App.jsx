@@ -1,13 +1,13 @@
 // Routing Imports
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 // UseEffect Imports
-import { useEffect } from 'react';
-// Component Imports
-import PortfolioPage from './PortfolioPage';
-import DetailedPortfolio from './DetailedPortfolio';
-import ProjectDetailsPage from './ProjectDetailsPage';
-import Navbar from './Navbar';
-import About from './About';
+import { useEffect, Suspense, lazy } from 'react';
+
+// Lazy load components for better performance
+const PortfolioPage = lazy(() => import('./PortfolioPage'));
+const DetailedPortfolio = lazy(() => import('./DetailedPortfolio'));
+const ProjectDetailsPage = lazy(() => import('./ProjectDetailsPage'));
+const About = lazy(() => import('./About'));
 //Unique style imports
 import './PortfolioStyles.css';
 // ScrolltoTop function
@@ -89,12 +89,18 @@ function App() {
 
       {/* Routes */}
       <div className="App">
-        <Routes>
-          <Route path="/" element={<PortfolioPage />} />
-          <Route path="/portfolio" element={<DetailedPortfolio />} />
-          <Route path="/project/:projectId" element={<ProjectDetailsPage />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<PortfolioPage />} />
+            <Route path="/portfolio" element={<DetailedPortfolio />} />
+            <Route path="/project/:projectId" element={<ProjectDetailsPage />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </Suspense>
       </div>
     </Router>
 

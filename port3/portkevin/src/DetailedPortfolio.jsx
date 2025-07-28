@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Component imports
 import Navbar from './Navbar';
 import Crosshair from './Crosshair';
+import LazyImage from './LazyImage';
+import LazyVideo from './LazyVideo';
 // Unique style imports
 import './PortfolioStyles.css';
 // Footer component import
@@ -419,7 +421,7 @@ const DetailedPortfolio = () => {
                     <div className="image-container">
                         {activeProject !== null ? (
                             currentProject.image.endsWith('.mp4') ? (
-                                <video
+                                <LazyVideo
                                     key={`video-${currentProject.id}`}
                                     src={currentProject.image}
                                     alt={currentProject.title}
@@ -428,16 +430,27 @@ const DetailedPortfolio = () => {
                                     loop
                                     muted
                                     playsInline
+                                    onLoadedData={() => handleImageLoad(currentProject.id)}
+                                    onError={() => handleImageError(currentProject.id)}
+                                    placeholder={
+                                        <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                                        </div>
+                                    }
                                 />
                             ) : (
-                                <img
+                                <LazyImage
                                     key={`img-${currentProject.id}`}
                                     src={currentProject.image}
                                     alt={currentProject.title}
                                     className="project-image"
-                                    loading="eager"
                                     onLoad={() => handleImageLoad(currentProject.id)}
                                     onError={() => handleImageError(currentProject.id)}
+                                    placeholder={
+                                        <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                                        </div>
+                                    }
                                 />
                             )
                         ) : (
@@ -498,7 +511,7 @@ const DetailedPortfolio = () => {
                             >
                                 {activeProject !== null ? (
                                     currentProject.image.endsWith('.mp4') ? (
-                                        <video
+                                        <LazyVideo
                                             key={`video-${currentProject.id}`}
                                             src={currentProject.image}
                                             alt={currentProject.title}
@@ -507,16 +520,27 @@ const DetailedPortfolio = () => {
                                             loop
                                             muted
                                             playsInline
+                                            onLoadedData={() => handleImageLoad(currentProject.id)}
+                                            onError={() => handleImageError(currentProject.id)}
+                                            placeholder={
+                                                <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                                                </div>
+                                            }
                                         />
                                     ) : (
-                                        <img
+                                        <LazyImage
                                             key={`img-${currentProject.id}`}
                                             src={currentProject.image}
                                             alt={currentProject.title}
                                             className="w-full h-full object-cover"
-                                            loading="eager"
                                             onLoad={() => handleImageLoad(currentProject.id)}
                                             onError={() => handleImageError(currentProject.id)}
+                                            placeholder={
+                                                <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                                                </div>
+                                            }
                                         />
                                     )
                                 ) : (

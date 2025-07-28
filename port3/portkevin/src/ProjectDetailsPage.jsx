@@ -55,7 +55,7 @@ This project reinforced my belief that digital platforms can preserve cultural e
             },
             timeline: {
                 start: 'January',
-                end: 'March 2024',
+                end: 'March 2025',
             },
             client: {
                 name: 'Personal Project',
@@ -159,7 +159,7 @@ This project demonstrated how personal interests can drive more engaging technic
             },
             timeline: {
                 start: 'September',
-                end: 'November 2023',
+                end: 'November 2025',
             },
             client: {
                 name: 'Personal Project',
@@ -264,7 +264,7 @@ What I value most about this project is how it balances utility with aesthetics 
             },
             timeline: {
                 start: 'April',
-                end: 'June 2023',
+                end: 'June 2025',
             },
             client: {
                 name: 'Personal Project',
@@ -357,7 +357,7 @@ This project reinforced my appreciation for the Swiss design principles that hav
                 image: '/img/cfcover.jpg'
             },
             timeline: {
-                start: 'October 2024',
+                start: 'October 2025',
                 end: 'February 2025',
             },
             client: {
@@ -457,8 +457,8 @@ The project's playful nature reminded me why I became a developer - to create sp
                 image: '/img/dbconceptcover.jpg'
             },
             timeline: {
-                start: 'March 2024',
-                end: 'April 2024',
+                start: 'March 2025',
+                end: 'April 2025',
             },
             client: {
                 name: 'Personal Project',

@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Navbar from './Navbar';
+import LazyImage from './LazyImage';
+import LazyVideo from './LazyVideo';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -212,10 +214,15 @@ const ProjectListItem = ({ project, navigate }) => {
                                 }}
                             />
                         ) : (
-                            <img
+                            <LazyImage
                                 src={previewMedia.src}
                                 alt={`${project.name} preview`}
                                 className="w-full h-full object-cover"
+                                placeholder={
+                                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs bg-gray-100">
+                                        LOADING...
+                                    </div>
+                                }
                                 onError={(e) => {
                                     e.target.style.display = 'none';
                                     e.target.parentNode.innerHTML = `<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">PREVIEW</div>`;
@@ -237,20 +244,30 @@ const ProjectListItem = ({ project, navigate }) => {
                             {project.images.map((image, idx) => (
                                 <div key={idx} className="flex-shrink-0 w-20 h-12 sm:w-24 sm:h-16 bg-gray-200 rounded overflow-hidden">
                                     {image.endsWith('.mp4') ? (
-                                        <video
+                                        <LazyVideo
                                             src={image}
                                             className="w-full h-full object-cover"
                                             muted
                                             playsInline
                                             preload="metadata"
+                                            placeholder={
+                                                <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs bg-gray-100">
+                                                    VIDEO
+                                                </div>
+                                            }
                                             onMouseEnter={(e) => e.target.play().catch(() => { })}
                                             onMouseLeave={(e) => e.target.pause()}
                                         />
                                     ) : (
-                                        <img
+                                        <LazyImage
                                             src={image}
                                             alt={`${project.name} ${idx + 1}`}
                                             className="w-full h-full object-cover"
+                                            placeholder={
+                                                <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs bg-gray-100">
+                                                    IMG
+                                                </div>
+                                            }
                                             onError={(e) => {
                                                 e.target.style.display = 'none';
                                                 e.target.parentNode.innerHTML = `<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">IMG</div>`;
@@ -285,7 +302,7 @@ const PortfolioPage = () => {
             name: "FONTS.LOCAL",
             type: "WEB DEVELOPMENT . UI/UX . 3D",
             role: "DEVELOPER, DESIGNER, 3D ARTIST",
-            year: "2024",
+            year: "2025",
             projectId: "01",
             images: ["/fontslocalproject/fontslocal.mp4", "/img/fontlocalcover.jpg", "/fontslocalproject/galleryimages/fl1.png", "/fontslocalproject/galleryimages/fl2.png", "/fontslocalproject/galleryimages/fl3.png", "/fontslocalproject/galleryimages/fl4.png"]
         },
@@ -294,7 +311,7 @@ const PortfolioPage = () => {
             name: "DOUBLEBACK CONCEPT STORE",
             type: "UI/UX . DESIGN . BRANDING",
             role: "DESIGNER, DEVELOPER",
-            year: "2024",
+            year: "2025",
             projectId: "02",
             images: ["/doublebackproject/dbconceptvid.mp4", "/img/dbconceptcover.jpg", "/doublebackproject/galleryimages/db1.png", "/doublebackproject/galleryimages/db2.png", "/doublebackproject/galleryimages/db3.png", "/doublebackproject/galleryimages/db4.png"]
         },
@@ -303,7 +320,7 @@ const PortfolioPage = () => {
             name: "COURTFINDER+",
             type: "WEB DEVELOPMENT . UI/UX",
             role: "DEVELOPER, DESIGNER",
-            year: "2024",
+            year: "2025",
             projectId: "03",
             images: ["/courtfinderproject/courtfinder.mp4", "/img/cfcover.JPG", "/courtfinderproject/galleryimages/cf1.png", "/courtfinderproject/galleryimages/cf2.png", "/courtfinderproject/galleryimages/cf3.png", "/courtfinderproject/galleryimages/cf4.png"]
         },
@@ -312,7 +329,7 @@ const PortfolioPage = () => {
             name: "KIAMVP",
             type: "3D . WEB DEVELOPMENT . DESIGN",
             role: "3D DEVELOPER, DESIGNER",
-            year: "2023",
+            year: "2025",
             projectId: "04",
             images: ["/kiamvp-project/kiamvpraceoptim2.mp4", "/img/kiacover.webp", "/kiamvp-project/galleryimages/mvp1.png", "/kiamvp-project/galleryimages/mvp2.png", "/kiamvp-project/galleryimages/mvp3.png", "/kiamvp-project/galleryimages/mvp4.png"]
         },
@@ -330,7 +347,7 @@ const PortfolioPage = () => {
             name: "3D ART GALLERY",
             type: "THREE.JS . 3D . WEB DEVELOPMENT",
             role: "3D DEVELOPER, DESIGNER",
-            year: "2024",
+            year: "2025",
             projectId: "06",
             images: ["/threejs-project/threejsbuild.mp4", "/img/threejscover.jpeg", "/threejs-project/galleryimages/threejs1.png", "/threejs-project/galleryimages/threejs2.png", "/threejs-project/galleryimages/threejs3.png", "/threejs-project/galleryimages/threejs4.png"]
         }
@@ -535,11 +552,16 @@ const PortfolioPage = () => {
                 <section id="about" ref={aboutRef} className="min-h-screen relative overflow-hidden bg-white">
                     {/* Background Image - Desktop Only (Large screens and up) */}
                     <div className="absolute right-0 top-0 w-1/2 h-full hidden xl:block">
-                        <img
+                        <LazyImage
                             id="about-image"
                             src="/img/who1.jpeg"
                             alt="Kevin Lazo Portrait"
                             className="w-full h-full object-cover"
+                            placeholder={
+                                <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-xl">
+                                    Portrait Image
+                                </div>
+                            }
                             onError={(e) => {
                                 e.target.style.display = 'none';
                                 e.target.parentNode.innerHTML = `
@@ -674,10 +696,15 @@ const PortfolioPage = () => {
 
                             {/* Footer Image - Desktop Only */}
                             <div className="flex items-center justify-center">
-                                <img
+                                <LazyImage
                                     src="/footer.PNG"
                                     alt="Footer Logo"
                                     className="h-[18vw] sm:h-[15vw] md:h-[12rem] lg:h-[15rem] xl:h-[18rem] w-auto"
+                                    placeholder={
+                                        <div className="h-[18vw] sm:h-[15vw] md:h-[12rem] lg:h-[15rem] xl:h-[18rem] w-auto bg-gray-200 flex items-center justify-center">
+                                            <span className="text-gray-500">LOGO</span>
+                                        </div>
+                                    }
                                 />
                             </div>
 

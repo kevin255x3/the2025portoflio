@@ -6,17 +6,40 @@
 @font-face {
   font-family: 'Island';
   src: url('/fonts/Island_Roman.ttf') format('truetype');
-
+  font-display: swap;
+  /* Optimize font loading */
 }
 
 @font-face {
   font-family: 'Romancc';
   src: url('/fonts/RomanAntique-Italic.ttf') format('truetype');
-
+  font-display: swap;
+  /* Optimize font loading */
 }
 
 body {
   @apply bg-gray-100 text-gray-900 font-sans;
+}
+
+/* Performance optimizations */
+.lazy-image-container,
+.lazy-video-container {
+  position: relative;
+  display: block;
+}
+
+.lazy-image-placeholder,
+.lazy-video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  color: #6b7280;
 }
 
 /* Ensure images are responsive and maintain aspect ratio */
@@ -35,9 +58,14 @@ body {
   object-fit: cover;
 }
 
-/* Transition effect for navigation links */
+/* Transition effect for navigation links - using transform for better performance */
 .nav-link {
-  @apply transition-opacity duration-300 cursor-pointer;
+  @apply transition-transform duration-300 cursor-pointer;
+  will-change: transform;
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
 }
 
 /* Utility class for page container */
